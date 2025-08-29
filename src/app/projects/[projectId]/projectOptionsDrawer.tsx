@@ -1,7 +1,6 @@
 "use client";
 
 import { parseProjectFolderEntries } from "@/actions/fileActions";
-import { BASE_DIR } from "@/actions/helper";
 import FileUploader from "@/components/FileUploader";
 import OptionsDrawer from "@/components/optionsDrawer";
 import { Button } from "@/components/ui/button";

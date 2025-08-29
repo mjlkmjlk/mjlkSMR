@@ -1,5 +1,5 @@
 "use server";
-import { and, eq, getTableColumns } from "drizzle-orm";
+import { eq, getTableColumns } from "drizzle-orm";
 import { db } from "..";
 import { fileEntries, projects } from "../schema";
 import { moveFileIntoDeleted } from "@/actions/fileActions";

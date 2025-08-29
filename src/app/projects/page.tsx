@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { FormNewProject } from "@/components/FormNewProject";
-import Link from "next/link";
 import { deleteProject } from "@/db/actions";
 import { ProjectMetaType } from "@/db/actions/getProjectMeta";
 import { getProjectsMeta } from "@/db/actions/getProjectsMeta";
