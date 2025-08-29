@@ -36,7 +36,7 @@ export default function DefaultDialogContent({
   return (
     <DialogContent
       className={clsx(
-        "flex flex-col overflow-hidden max-h-[99vh] h-full max-w-[99vw] w-full transition rounded-xl bg-white/5 p-4 backdrop-blur-2xl duration-300 ease-out data-closed:transform-[scale(95%)] data-closed:opacity-0",
+        "flex flex-col overflow-hidden max-h-[99vh]  max-w-[99vw] w-full transition rounded-xl bg-white/5 p-4 backdrop-blur-2xl duration-300 ease-out data-closed:transform-[scale(95%)] data-closed:opacity-0",
         className
       )}
     >

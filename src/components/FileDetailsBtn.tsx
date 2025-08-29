@@ -53,6 +53,7 @@ export default function FileDetailsBtn(props: IFileDetailsBtn) {
         </Tooltip>
       </DialogTrigger>
       <DefaultDialogContent
+        className="h-full"
         title={
           <span>
             {"File: "}
