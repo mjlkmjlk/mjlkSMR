@@ -48,9 +48,12 @@ export default function PageProjects() {
         <FormNewProject handleUpdate={handleFetchProjects} />
       </div>
 
-      {!projectsArr.length && <span>There are no projects.</span>}
       <Table>
-        <TableCaption>Your current projects.</TableCaption>
+        <TableCaption>
+          {!projectsArr.length
+            ? "There are no projects."
+            : "Your current projects."}
+        </TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead className="w-[30]">Name</TableHead>
