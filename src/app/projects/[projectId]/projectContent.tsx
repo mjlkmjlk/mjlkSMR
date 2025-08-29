@@ -181,6 +181,11 @@ export default function ProjectContent({
         <div className="flex flex-col items-center justify-center">
           <span>{"Nothing here :("}</span>
           <span>Go add something.</span>
+          <div className="flex items-center gap-1">
+            <span>Klick on the</span>
+            <Cog6ToothIcon className="size-5" />
+            <span>in the top right.</span>
+          </div>
         </div>
       )}
     </div>
