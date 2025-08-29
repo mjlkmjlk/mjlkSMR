@@ -1,0 +1,263 @@
+{
+  "version": "6",
+  "dialect": "sqlite",
+  "id": "931b7623-b1ae-4ea0-9482-c663534686d7",
+  "prevId": "2db35a8a-5810-4ff6-a28a-b6c19a333833",
+  "tables": {
+    "tFileEntries": {
+      "name": "tFileEntries",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "guid": {
+          "name": "guid",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "file_path": {
+          "name": "file_path",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "project_id": {
+          "name": "project_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "status": {
+          "name": "status",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 0
+        }
+      },
+      "indexes": {
+        "tFileEntries_guid_unique": {
+          "name": "tFileEntries_guid_unique",
+          "columns": [
+            "guid"
+          ],
+          "isUnique": true
+        },
+        "guid_idx": {
+          "name": "guid_idx",
+          "columns": [
+            "guid"
+          ],
+          "isUnique": true
+        },
+        "file_entries_project_id_idx": {
+          "name": "file_entries_project_id_idx",
+          "columns": [
+            "project_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "tFileEntries_project_id_tProjects_id_fk": {
+          "name": "tFileEntries_project_id_tProjects_id_fk",
+          "tableFrom": "tFileEntries",
+          "tableTo": "tProjects",
+          "columnsFrom": [
+            "project_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "tFileRelations": {
+      "name": "tFileRelations",
+      "columns": {
+        "key1": {
+          "name": "key1",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "key2": {
+          "name": "key2",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "result": {
+          "name": "result",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "project_id": {
+          "name": "project_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "file_relations_project_id_idx": {
+          "name": "file_relations_project_id_idx",
+          "columns": [
+            "project_id"
+          ],
+          "isUnique": false
+        },
+        "idx_key1": {
+          "name": "idx_key1",
+          "columns": [
+            "key1"
+          ],
+          "isUnique": false
+        },
+        "idx_key2": {
+          "name": "idx_key2",
+          "columns": [
+            "key2"
+          ],
+          "isUnique": false
+        },
+        "idx_project_key_pair": {
+          "name": "idx_project_key_pair",
+          "columns": [
+            "project_id",
+            "key1",
+            "key2"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "tFileRelations_key1_tFileEntries_id_fk": {
+          "name": "tFileRelations_key1_tFileEntries_id_fk",
+          "tableFrom": "tFileRelations",
+          "tableTo": "tFileEntries",
+          "columnsFrom": [
+            "key1"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "tFileRelations_key2_tFileEntries_id_fk": {
+          "name": "tFileRelations_key2_tFileEntries_id_fk",
+          "tableFrom": "tFileRelations",
+          "tableTo": "tFileEntries",
+          "columnsFrom": [
+            "key2"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "tFileRelations_project_id_tProjects_id_fk": {
+          "name": "tFileRelations_project_id_tProjects_id_fk",
+          "tableFrom": "tFileRelations",
+          "tableTo": "tProjects",
+          "columnsFrom": [
+            "project_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "tFileRelations_key1_key2_pk": {
+          "columns": [
+            "key1",
+            "key2"
+          ],
+          "name": "tFileRelations_key1_key2_pk"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "tProjects": {
+      "name": "tProjects",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "project_path": {
+          "name": "project_path",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "tProjects_name_unique": {
+          "name": "tProjects_name_unique",
+          "columns": [
+            "name"
+          ],
+          "isUnique": true
+        },
+        "tProjects_project_path_unique": {
+          "name": "tProjects_project_path_unique",
+          "columns": [
+            "project_path"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    }
+  },
+  "views": {},
+  "enums": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  },
+  "internal": {
+    "indexes": {}
+  }
+}
