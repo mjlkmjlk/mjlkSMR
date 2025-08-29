@@ -1,11 +1,6 @@
 "use client";
 
-import { parseProjectFolderEntries } from "@/actions/fileActions";
-import {
-  ArrowPathRoundedSquareIcon,
-  ArrowUpOnSquareStackIcon,
-} from "@heroicons/react/24/outline";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import ProjectPagination, { next } from "./ProjectPagination";
 import ProjectFileBox from "./ProjectFileBox";
 import { triangular } from "@/lib/helper";
@@ -15,14 +10,16 @@ import {
 } from "@/db/actions/fetchFilePairs";
 import { getProjectMeta, ProjectMetaType } from "@/db/actions/getProjectMeta";
 import { voteForEntry } from "@/db/actions/voteForEntry";
-import OptionsDrawer from "@/components/optionsDrawer";
-import { PhotoIcon, Square2StackIcon } from "@heroicons/react/16/solid";
+import {
+  Cog6ToothIcon,
+  PhotoIcon,
+  Square2StackIcon,
+} from "@heroicons/react/16/solid";
 import ProjectNav from "@/components/base/ProjectNav";
-import { Button } from "@/components/ui/button";
 import FileUploader from "@/components/FileUploader";
-import { Checkbox } from "@/components/ui/checkbox";
 import ProjectOptionsDrawer from "./projectOptionsDrawer";
 import { Spinner } from "@/components/ui/shadcn-io/spinner";
+import { SettingsContext } from "@/providers/settingsProvider";
 
 export interface IProjectContent {
   id: number;
@@ -38,9 +35,8 @@ export default function ProjectContent({
   const [fileIndex, setFileIndex] = useState<number>(0);
   const [projectMeta, setProjectMeta] = useState<ProjectMetaType>();
   const [sessionResults, setSessionResults] = useState<number[]>([]);
-  const [isAutoNext, setIsAutoNext] = useState<boolean>(true);
-  const [isAutoRefetch, setIsAutoRefetch] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const { isAutoNext, isAutoRefetch } = useContext(SettingsContext);
 
   const handleGetProjectMeta = useCallback(async () => {
     const newProjectMeta = await getProjectMeta(id);
@@ -133,10 +129,7 @@ export default function ProjectContent({
             )}
           <ProjectOptionsDrawer
             projectId={id}
-            isAutoRefetch={isAutoRefetch}
-            isAutoNext={isAutoNext}
-            setIsAutoRefetch={setIsAutoRefetch}
-            setIsAutoNext={setIsAutoNext}
+            projectPath={projectPath}
             handleGetProjectMeta={handleGetProjectMeta}
             handleGetFilePairs={handleGetFilePairs}
           />
