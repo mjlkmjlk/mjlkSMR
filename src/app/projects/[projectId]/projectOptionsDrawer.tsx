@@ -1,10 +1,12 @@
 "use client";
 
 import { parseProjectFolderEntries } from "@/actions/fileActions";
+import { BASE_DIR } from "@/actions/helper";
 import FileUploader from "@/components/FileUploader";
 import OptionsDrawer from "@/components/optionsDrawer";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Typography } from "@/components/ui/typography";
 import { SettingsContext } from "@/providers/settingsProvider";
 import {
   ArrowPathRoundedSquareIcon,
@@ -14,16 +16,14 @@ import { useContext } from "react";
 
 export interface IProjectOptionsDrawer {
   projectId: number;
-  isAutoRefetch: boolean;
-  isAutoNext: boolean;
-  setIsAutoRefetch: (checked: boolean) => void;
-  setIsAutoNext: (checked: boolean) => void;
+  projectPath: string;
   handleGetProjectMeta: () => void;
   handleGetFilePairs: () => void;
 }
 
 export default function ProjectOptionsDrawer({
   projectId,
+  projectPath,
   handleGetProjectMeta,
   handleGetFilePairs,
 }: IProjectOptionsDrawer) {
@@ -35,11 +35,32 @@ export default function ProjectOptionsDrawer({
 
     handleGetProjectMeta();
   }
+
   return (
-    <OptionsDrawer className="max-w-lg">
+    <OptionsDrawer className="max-w-2xl">
       <div className="flex justify-center gap-4">
+        <div className="flex flex-col border-1 rounded-md p-2">
+          <Typography variant="h4" className="p-0">
+            How to start
+          </Typography>
+          <ol className="text-xs flex flex-col gap-2 list-decimal ml-4">
+            <li>
+              Choose files to import. <br />
+              You can also just drop your files in .../mjlkSMR/public/
+              {projectPath}
+            </li>
+            <li className="text-xs">
+              When there are new files in your folder press {'"Scan Files"'} to
+              load them into the Database.
+            </li>
+            <li className="text-xs">
+              Press {'"Get New Pairs"'} or F5 to start!
+            </li>
+          </ol>
+        </div>
         <div className=" flex flex-col gap-2 ">
           <FileUploader projectId={projectId} />
+
           <Button
             size="sm"
             variant="default"
