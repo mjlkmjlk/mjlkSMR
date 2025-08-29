@@ -25,10 +25,8 @@ export async function parseProjectFolderEntries(projectId: number) {
     process.env.NEXT_PUBLIC_FILE_TYPES_IMG +
     "|" +
     process.env.NEXT_PUBLIC_FILE_TYPES_VID;
-  console.log("combinedFileFormats", combinedFileFormats);
-
   const regex = new RegExp(String.raw`\.(${combinedFileFormats})$`, "i");
-  console.log("regex", regex);
+
   //Get all filenames from the target directory
   const projectFilesArr = fs.readdirSync(targetDir);
   //Remove all filenames that do not match the regex
