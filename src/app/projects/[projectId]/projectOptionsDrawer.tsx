@@ -6,6 +6,7 @@ import OptionsDrawer from "@/components/optionsDrawer";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Typography } from "@/components/ui/typography";
+import { Slider } from "@/components/ui/slider"
 import { SettingsContext } from "@/providers/settingsProvider";
 import {
   ArrowPathRoundedSquareIcon,
@@ -26,7 +27,9 @@ export default function ProjectOptionsDrawer({
   handleGetProjectMeta,
   handleGetFilePairs,
 }: IProjectOptionsDrawer) {
-  const { isAutoNext, isAutoRefetch, setIsAutoRefetch, setIsAutoNext } =
+  const { isAutoNext, isAutoRefetch, setIsAutoRefetch, setIsAutoNext, isVideoPlayerMute, setIsVideoPlayerMute,
+    defaultVideoPlayerVolume,
+    setDefaultVideoPlayerVolume } =
     useContext(SettingsContext);
 
   async function handleParseProjectFolderEntries() {
@@ -83,18 +86,34 @@ export default function ProjectOptionsDrawer({
               }}
             />
             <span className="text-nowrap">Auto Fetch Pairs</span>
-          </div>
-          <div className="flex items-center gap-1">
+            </div>
+            <div className="flex items-center gap-1">
             <Checkbox
-              checked={isAutoNext}
-              onCheckedChange={(checked) => {
-                if (checked !== "indeterminate") {
-                  setIsAutoNext(checked);
-                }
-              }}
+            checked={isAutoNext}
+            onCheckedChange={(checked) => {
+              if (checked !== "indeterminate") {
+                setIsAutoNext(checked);
+              }
+            }}
             />
             <span className="text-nowrap">Auto Forward</span>
-          </div>
+            </div>
+            <div className="flex items-center gap-1">
+            <Checkbox
+            checked={isVideoPlayerMute}
+            onCheckedChange={(checked) => {
+              if (checked !== "indeterminate") {
+                setIsVideoPlayerMute(checked);
+              }
+            }}
+            />
+            <span className="text-nowrap">Mute Video</span>
+            </div>
+            <div className="flex items-center gap-1">
+            <Slider defaultValue={[defaultVideoPlayerVolume]} max={1} min={0} step={0.01} onValueChange={val=>{setDefaultVideoPlayerVolume(val[0])}}/>
+
+            <span className="text-nowrap">Vol {Math.round(defaultVideoPlayerVolume*1000)/10}%</span>
+            </div>
         </div>
       </div>
     </OptionsDrawer>

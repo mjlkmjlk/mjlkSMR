@@ -37,12 +37,13 @@ export default function ProjectFileBox({
       />
       <div
         className={clsx(
-          `flex justify-between gap-1 ${
-            itemKey === 2 ? "flex-row-reverse" : "flex-row"
-          } delay-200 transition-opacity duration-200 opacity-0 group-hover:opacity-100 delay-hover-in-only  absolute top-0  px-1 w-full`
+          `flex  justify-between gap-2 ${
+            itemKey === 2 ? "flex-row" : "flex-row-reverse"
+          } delay-200 transition-opacity duration-200 absolute top-0 w-full px-1 opacity-1 group-hover:opacity-20`
         )}
+        //opacity-0 group-hover:opacity-100 delay-hover-in-only
       >
-        <DeleteFileBtn defaultSx={true} id={id} callback={handleMarkDeleted} />
+
         <Button
           size="default"
           variant="default"
@@ -60,7 +61,10 @@ export default function ProjectFileBox({
         >
           <CheckIcon className="size-6" />
         </Button>
-        <FileDetailsBtn
+        <div className={clsx(`flex gap-2 ${
+          itemKey === 2 ? "flex-row" : "flex-row-reverse"
+        } `)}>
+          <FileDetailsBtn
           defaultSx={true}
           projectPath={projectPath}
           projectId={projectId}
@@ -70,7 +74,9 @@ export default function ProjectFileBox({
           totals={0}
           ratio={0}
           status={0}
-        />
+          />
+          <DeleteFileBtn defaultSx={true} id={id} callback={handleMarkDeleted} />
+        </div>
       </div>
     </div>
   );

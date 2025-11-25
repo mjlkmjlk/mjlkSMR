@@ -1,4 +1,6 @@
 import Image from "next/image";
+import { SettingsContext } from "@/providers/settingsProvider";
+import { useContext } from "react";
 
 export interface IMediaElement {
   src: string;
@@ -9,6 +11,7 @@ export interface IMediaElement {
 export default function MediaElement({ src, alt, autoplay }: IMediaElement) {
   const fileEnding = src.split(".").pop()?.toLocaleLowerCase();
   const videoFormats = process.env.NEXT_PUBLIC_FILE_TYPES_VID?.split("|") || [];
+  const {isVideoPlayerMute,defaultVideoPlayerVolume } = useContext(SettingsContext);
 
   if (fileEnding && videoFormats.indexOf(fileEnding) > -1) {
     return (
@@ -17,8 +20,12 @@ export default function MediaElement({ src, alt, autoplay }: IMediaElement) {
           controls
           autoPlay={autoplay}
           loop
-          muted={false}
+          muted={isVideoPlayerMute}
           className=" w-full h-full object-contain"
+          onLoadStart={(e)=> {
+            e.target.volume=defaultVideoPlayerVolume
+            console.log(e)
+          }}
         >
           <source src={src} type={"video/" + fileEnding} />
         </video>
